@@ -54,7 +54,7 @@
 
     <div id="bookingInfo" style="display:none;"></div>
 
-    <button id="setRefundButton" onclick="fetchRefundDetails()">Set Refund Details</button>
+    <button id="setRefundButton" onclick="fetchRefundDetails()">Get Refund Details</button>
 
     <div id="refundDetails" style="display:none;"></div>
 
@@ -86,8 +86,8 @@
                 .then(response => response.json())
                 .then(data => {
                     const refundDetails = `
-                        <p>Refund: ${data.RefundDetails}</p>
-                        <p>Date: ${data.Date}</p>
+                        <p>${data.headers.RefundDetails}: ${data.values.RefundDetails}</p>
+                        <p>${data.headers.Date}: ${data.values.Date}</p>
                     `;
                     document.getElementById("refundDetails").innerHTML = refundDetails;
                     document.getElementById("refundDetails").style.display = "block";
