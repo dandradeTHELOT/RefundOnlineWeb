@@ -85,7 +85,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const refundDetails = `
-                        <p><strong>${data.headers.Refund}:</strong> ${data.values.Refund}</p>
+                        <p><strong>${data.headers.RefundDetails}:</strong> ${data.values.RefundDetails}</p>
                         <p><strong>${data.headers.Date}:</strong> ${data.values.Date}</p>
                     `;
                     document.getElementById("refundDetails").innerHTML = refundDetails;
