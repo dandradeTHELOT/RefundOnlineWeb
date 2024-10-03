@@ -61,7 +61,7 @@
     <script>
         // Mostrar los datos desde Google Sheets
         function fetchBookingInfo() {
-            fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vREF8NEE7VO3dobkXNKXOtCfzQzoKRw_6VoO3JLuzJXXHCpeQiJ8G9XW-8QFKIJhCItguI2nxA-sCtT/pubhtml') // URL de Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbwJueYWhaOJw_MFo2ztaEyvWXrTO7RWNrTTK6OBOjCgzRvT8kmFrPT_qZglue2cIq4b/exec') // URL de Google Apps Script
                 .then(response => response.json())
                 .then(data => {
                     const bookingDetails = `
@@ -82,11 +82,11 @@
 
         // Mostrar los detalles de reembolso desde otra hoja de Google Sheets
         function fetchRefundDetails() {
-            fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRkFDocxRMKPkHx3ZecNCGhfF9I02oE8kRTtdApMAjbQCYlp3yQv3vkKdHoZOeQpioAmUPy3xbAlSG4/pubhtml?gid=0&single=true') // Cambia la URL para la hoja de reembolsos
+            fetch('https://script.google.com/macros/s/AKfycbwwxh55IEs1ycUp38Z0T8_eqQgxEbkoSQ0aOPrVA8Sx59YqLnUEh5gO7d_yLtxdTYix/exec') // Cambia la URL para la hoja de reembolsos
                 .then(response => response.json())
                 .then(data => {
                     const refundDetails = `
-                        <p>Refund: ${data.Refund}</p>
+                        <p>Refund: ${data.Refund}</p> <!-- Ajustado a "Refund" -->
                         <p>Date: ${data.Date}</p>
                     `;
                     document.getElementById("refundDetails").innerHTML = refundDetails;
