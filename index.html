@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #003a7e;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            margin-top: 15%;
+        }
+        #loadingMessage {
+            font-size: 26px;
+            color: #ffffff;
+        }
+        #setRefundButton {
+            display: none;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #005bb5;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #setRefundButton:hover {
+            background-color: #007bff;
+        }
+        #logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        #bookingInfo, #refundDetails {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="logo" src="https://cdn.theatertoolkit.com/cdn/wwwroot/themes/custom/thelotent/images/logo.png?v=20240904.1" alt="Logo">
+        
+        <p id="loadingMessage">We are loading your booking information...</p>
+    </div>
+
+    <div id="bookingInfo" style="display:none;"></div>
+
+    <button id="setRefundButton" onclick="fetchRefundDetails()">Set Refund Details</button>
+
+    <div id="refundDetails" style="display:none;"></div>
+
+    <script>
+        // Mostrar los datos desde Google Sheets
+        function fetchBookingInfo() {
+            fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vREF8NEE7VO3dobkXNKXOtCfzQzoKRw_6VoO3JLuzJXXHCpeQiJ8G9XW-8QFKIJhCItguI2nxA-sCtT/pubhtml') // URL de Google Apps Script
+                .then(response => response.json())
+                .then(data => {
+                    const bookingDetails = `
+                        <p>Booking ID: ${data.BookingID}</p>
+                        <p>Cinema: ${data.Cinema}</p>
+                        <p>Transaction Number: ${data.TransNumber}</p>
+                        <p>Date: ${data.Date}</p>
+                    `;
+                    document.getElementById("bookingInfo").innerHTML = bookingDetails;
+                    document.getElementById("bookingInfo").style.display = "block";
+                    document.getElementById("loadingMessage").style.display = "none";
+
+                    // Mostrar el botón "Set Refund Details"
+                    document.getElementById("setRefundButton").style.display = "block";
+                })
+                .catch(error => console.error('Error fetching booking information:', error));
+        }
+
+        // Mostrar los detalles de reembolso desde otra hoja de Google Sheets
+        function fetchRefundDetails() {
+            fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRkFDocxRMKPkHx3ZecNCGhfF9I02oE8kRTtdApMAjbQCYlp3yQv3vkKdHoZOeQpioAmUPy3xbAlSG4/pubhtml?gid=0&single=true') // Cambia la URL para la hoja de reembolsos
+                .then(response => response.json())
+                .then(data => {
+                    const refundDetails = `
+                        <p>Refund: ${data.Refund}</p>
+                        <p>Date: ${data.Date}</p>
+                    `;
+                    document.getElementById("refundDetails").innerHTML = refundDetails;
+                    document.getElementById("refundDetails").style.display = "block";
+                })
+                .catch(error => console.error('Error fetching refund details:', error));
+        }
+
+        // Ejecutar la función cuando cargue la página
+        window.onload = fetchBookingInfo;
+    </script>
+</body>
+</html>
