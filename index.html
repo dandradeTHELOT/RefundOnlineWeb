@@ -80,16 +80,16 @@
         }
 
         // Mostrar los detalles de reembolso desde otra hoja de Google Sheets
-        function fetchRefund() {
-            fetch('https://script.google.com/macros/s/AKfycbx4x5p-fvCnoSkQKv5nrXBe16MJJ2DsU-U-GkamAYD9MXBQHJk6hFTip83KCkktsYu0/exec') // URL de Google Apps Script para los detalles de reembolso
+        function fetchRefundDetails() {
+            fetch('https://script.google.com/macros/s/AKfycbwnNEOtNhSusNXN8NNULdHWrXPbC353FdtjazIWrFUpI-ip2qznhsFTi1K9fHQJHKy7/exec') // URL de Google Apps Script para los detalles de reembolso
                 .then(response => response.json())
                 .then(data => {
-                    const refund = `
+                    const refundDetails = `
                         <p><strong>${data.headers.Refund}:</strong> ${data.values.Refund}</p>
                         <p><strong>${data.headers.Date}:</strong> ${data.values.Date}</p>
                     `;
-                    document.getElementById("refund").innerHTML = refund;
-                    document.getElementById("refund").style.display = "block";
+                    document.getElementById("refundDetails").innerHTML = refundDetails;
+                    document.getElementById("refundDetails").style.display = "block";
                 })
                 .catch(error => console.error('Error al obtener los detalles de reembolso:', error));
         }
