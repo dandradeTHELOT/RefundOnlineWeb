@@ -65,10 +65,10 @@
                 .then(response => response.json())
                 .then(data => {
                     const bookingDetails = `
-                        <p>Booking ID: ${data.BookingID}</p>
-                        <p>Cinema: ${data.Cinema}</p>
-                        <p>Transaction Number: ${data.TransNumber}</p>
-                        <p>Date: ${data.Date}</p>
+                        <p>${data.headers.BookingID}: ${data.values.BookingID}</p>
+                        <p>${data.headers.Cinema}: ${data.values.Cinema}</p>
+                        <p>${data.headers.TransNumber}: ${data.values.TransNumber}</p>
+                        <p>${data.headers.Date}: ${data.values.Date}</p>
                     `;
                     document.getElementById("bookingInfo").innerHTML = bookingDetails;
                     document.getElementById("bookingInfo").style.display = "block";
@@ -86,7 +86,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const refundDetails = `
-                        <p>Refund: ${data.Refund}</p> <!-- Ajustado a "Refund" -->
+                        <p>Refund: ${data.Refund}</p>
                         <p>Date: ${data.Date}</p>
                     `;
                     document.getElementById("refundDetails").innerHTML = refundDetails;
