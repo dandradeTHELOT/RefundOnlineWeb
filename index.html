@@ -20,7 +20,7 @@
             font-size: 26px;
             color: #ffffff;
         }
-        #setRefundButton {
+        #setRefundButton, #refreshButton {
             display: none;
             margin-top: 20px;
             padding: 15px 30px;
@@ -32,7 +32,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        #setRefundButton:hover {
+        #setRefundButton:hover, #refreshButton:hover {
             background-color: #007bff;
         }
         #logo {
@@ -54,6 +54,7 @@
     <div id="bookingInfo" style="display:none;"></div>
 
     <button id="setRefundButton" onclick="fetchRefundDetails()">Get Refund Details</button>
+    <button id="refreshButton" onclick="refreshPage()">Refresh</button>
 
     <div id="refundDetails" style="display:none;"></div>
 
@@ -90,8 +91,16 @@
                     `;
                     document.getElementById("refundDetails").innerHTML = refundDetails;
                     document.getElementById("refundDetails").style.display = "block";
+                    
+                    // Mostrar el botón "Refresh" una vez cargados los detalles de reembolso
+                    document.getElementById("refreshButton").style.display = "block";
                 })
                 .catch(error => console.error('Error al obtener los detalles de reembolso:', error));
+        }
+
+        // Función para redirigir a otra página
+        function refreshPage() {
+            window.location.href = 'https://qkstzdro6ry.typeform.com/to/MIf1SW2o'; // Cambia esta URL a la que desees
         }
 
         // Ejecutar la función cuando cargue la página
